@@ -13,7 +13,7 @@
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 200 }
+                gravity: { y: 100 }
             }
         },
         scene: {
@@ -26,32 +26,29 @@
 
     function preload ()
     {
-        this.load.setBaseURL('https://labs.phaser.io');
+        this.load.setBaseURL('https://labs.phaser.io/assets/animations/');
 
-        this.load.image('sky', 'assets/skies/space3.png');
-        this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-        this.load.image('red', 'assets/particles/red.png');
+        this.load.image('cat1', 'cat1.png');
+        this.load.image('cat2', 'cat2.png');
+        this.load.image('cat3', 'cat3.png');
+        this.load.image('cat4', 'cat4.png');
     }
 
     function create ()
     {
-        this.add.image(400, 300, 'sky');
-
-        var particles = this.add.particles('red');
-
-        var emitter = particles.createEmitter({
-            speed: 100,
-            scale: { start: 1, end: 0 },
-            blendMode: 'ADD'
+        this.anims.create({
+            key: 'snooze',
+            frames: [
+                { key: 'cat1' },
+                { key: 'cat2' },
+                { key: 'cat3' },
+                { key: 'cat4', duration: 50 }
+            ],
+            frameRate: 8,
+            repeat: -1
         });
 
-        var logo = this.physics.add.image(400, 100, 'logo');
-
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-
-        emitter.startFollow(logo);
+        this.add.sprite(400, 300, 'cat1').play('snooze');
     }
     </script>
 
